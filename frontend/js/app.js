@@ -2,7 +2,9 @@ const pageLoaders = {
   dashboard:    loadDashboard,
   patients:     loadPatients,
   doctors:      loadDoctors,
+  departments:  loadDepartmentsPage,
   appointments: loadAppointments,
+  beds:         loadBedsPage,
   billing:      loadBilling,
 };
 
