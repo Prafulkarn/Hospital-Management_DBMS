@@ -38,7 +38,12 @@ CREATE TABLE beds (
     bed_id      INT AUTO_INCREMENT PRIMARY KEY,
     ward        VARCHAR(50) NOT NULL,
     bed_number  VARCHAR(10) NOT NULL,
-    is_occupied BOOLEAN DEFAULT FALSE
+    daily_rate  DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+    patient_id  INT UNIQUE,
+    is_occupied BOOLEAN DEFAULT FALSE,
+    allocated_at TIMESTAMP NULL DEFAULT NULL,
+    released_at  TIMESTAMP NULL DEFAULT NULL,
+    FOREIGN KEY (patient_id) REFERENCES patients(patient_id) ON DELETE SET NULL
 );
 
 CREATE TABLE appointments (
@@ -72,6 +77,7 @@ CREATE TABLE billing (
     patient_id  INT NOT NULL,
     appt_id     INT,
     amount      DECIMAL(10,2) NOT NULL,
+    bill_type   VARCHAR(20) NOT NULL DEFAULT 'Manual',
     paid        BOOLEAN DEFAULT FALSE,
     bill_date   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (patient_id) REFERENCES patients(patient_id),

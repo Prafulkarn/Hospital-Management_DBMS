@@ -37,6 +37,7 @@ SELECT
     b.bill_id,
     p.name      AS patient_name,
     b.amount,
+    b.bill_type,
     b.bill_date
 FROM billing b
 JOIN patients p ON p.patient_id = b.patient_id

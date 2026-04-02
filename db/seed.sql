@@ -12,9 +12,12 @@ INSERT INTO doctors(name, specialization, phone, email, dept_id) VALUES
 ('Dr. Ramesh KC',      'Orthopedic',       '9800000003', 'ramesh@hospital.com', 3),
 ('Dr. Sita Rai',       'General Physician','9800000004', 'sita@hospital.com',   4);
 
-INSERT INTO beds(ward, bed_number) VALUES
-('General Ward','G-01'),('General Ward','G-02'),
-('ICU','I-01'),('ICU','I-02');
+INSERT INTO beds(ward, bed_number, daily_rate) VALUES
+('General','G-01', 1000.00),
+('General','G-02', 1000.00),
+('Isolated','ISO-01', 1800.00),
+('ICU','I-01', 3500.00),
+('ICU','I-02', 3500.00);
 
 INSERT INTO patients(name, dob, gender, phone, email, blood_group) VALUES
 ('Ram Bahadur', '1990-05-10', 'Male',   '9811111111', 'ram@mail.com',  'O+'),

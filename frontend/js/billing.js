@@ -2,6 +2,7 @@ async function loadBilling() {
   const bills = await apiFetch('/billing');
   const unpaid = bills.filter(b => !b.paid);
   const totalRevenue = bills.filter(b => b.paid).reduce((s, b) => s + parseFloat(b.amount), 0);
+  const bedRevenue = bills.filter(b => b.bill_type === 'Bed').reduce((s, b) => s + parseFloat(b.amount), 0);
 
   document.getElementById('page-billing').innerHTML = `
     <h1>Billing</h1>
@@ -10,6 +11,7 @@ async function loadBilling() {
       <div class="stat-card blue"><div class="label">Total Bills</div><div class="value">${bills.length}</div></div>
       <div class="stat-card red"><div class="label">Unpaid</div><div class="value">${unpaid.length}</div></div>
       <div class="stat-card green"><div class="label">Revenue Collected</div><div class="value">Rs.${totalRevenue.toFixed(0)}</div></div>
+      <div class="stat-card warn"><div class="label">Bed Charges</div><div class="value">Rs.${bedRevenue.toFixed(0)}</div></div>
     </div>
     <div class="toolbar">
       <span>All bills</span>
@@ -18,12 +20,13 @@ async function loadBilling() {
     <div class="table-wrap">
       <table>
         <thead>
-          <tr><th>Bill ID</th><th>Patient</th><th>Amount</th><th>Date</th><th>Status</th><th>Action</th></tr>
+          <tr><th>Bill ID</th><th>Type</th><th>Patient</th><th>Amount</th><th>Date</th><th>Status</th><th>Action</th></tr>
         </thead>
         <tbody>
           ${bills.map(b => `
             <tr>
               <td>#${b.bill_id}</td>
+              <td>${badgeBillType(b.bill_type)}</td>
               <td>${b.patient_name}</td>
               <td>Rs. ${parseFloat(b.amount).toFixed(2)}</td>
               <td>${new Date(b.bill_date).toLocaleDateString()}</td>
@@ -38,6 +41,16 @@ async function loadBilling() {
       </table>
     </div>
   `;
+}
+
+function badgeBillType(type) {
+  const normalized = type || 'Manual';
+  const classes = {
+    Bed: 'badge-blue',
+    Manual: 'badge-warn',
+    Appointment: 'badge-green',
+  };
+  return `<span class="badge ${classes[normalized] || 'badge-blue'}">${normalized}</span>`;
 }
 
 async function showGenerateBill() {
