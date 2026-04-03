@@ -47,6 +47,9 @@ async function ensureBedSchema() {
 
 async function ensureBillingSchema() {
   await addColumnIfMissing('billing', 'bill_type', "VARCHAR(20) NOT NULL DEFAULT 'Manual'");
+  await addColumnIfMissing('billing', 'is_insured', 'BOOLEAN DEFAULT FALSE');
+  await addColumnIfMissing('billing', 'insurance_percentage', 'DECIMAL(5,2) DEFAULT 0.00');
+  await addColumnIfMissing('billing', 'final_amount', 'DECIMAL(10,2) NOT NULL DEFAULT 0.00');
 }
 
 async function runMigrations() {
