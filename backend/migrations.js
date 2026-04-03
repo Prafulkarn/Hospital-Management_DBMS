@@ -9,7 +9,7 @@ async function columnExists(tableName, columnName) {
        AND COLUMN_NAME = ?`,
     [tableName, columnName]
   );
-  return rows[0].count > 0;
+  return rows[0].count>0;
 }
 
 async function addColumnIfMissing(tableName, columnName, definition) {
