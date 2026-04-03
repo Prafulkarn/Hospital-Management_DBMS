@@ -73,13 +73,16 @@ CREATE TABLE medical_records (
 );
 
 CREATE TABLE billing (
-    bill_id     INT AUTO_INCREMENT PRIMARY KEY,
-    patient_id  INT NOT NULL,
-    appt_id     INT,
-    amount      DECIMAL(10,2) NOT NULL,
-    bill_type   VARCHAR(20) NOT NULL DEFAULT 'Manual',
-    paid        BOOLEAN DEFAULT FALSE,
-    bill_date   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    bill_id             INT AUTO_INCREMENT PRIMARY KEY,
+    patient_id          INT NOT NULL,
+    appt_id             INT,
+    amount              DECIMAL(10,2) NOT NULL,
+    is_insured          BOOLEAN DEFAULT FALSE,
+    insurance_percentage DECIMAL(5,2) DEFAULT 0.00,
+    final_amount        DECIMAL(10,2) NOT NULL,
+    bill_type           VARCHAR(20) NOT NULL DEFAULT 'Manual',
+    paid                BOOLEAN DEFAULT FALSE,
+    bill_date           TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (patient_id) REFERENCES patients(patient_id),
     FOREIGN KEY (appt_id)    REFERENCES appointments(appt_id)
 );
