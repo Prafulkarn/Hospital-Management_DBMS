@@ -50,6 +50,26 @@ async function ensureBillingSchema() {
   await addColumnIfMissing('billing', 'is_insured', 'BOOLEAN DEFAULT FALSE');
   await addColumnIfMissing('billing', 'insurance_percentage', 'DECIMAL(5,2) DEFAULT 0.00');
   await addColumnIfMissing('billing', 'final_amount', 'DECIMAL(10,2) NOT NULL DEFAULT 0.00');
+
+  await db.query(`
+    UPDATE billing
+    SET final_amount = CASE
+      WHEN is_insured = 1 AND insurance_percentage > 0
+        THEN ROUND(amount - ((amount * insurance_percentage) / 100), 2)
+      ELSE amount
+    END
+    WHERE final_amount IS NULL OR (final_amount = 0 AND amount > 0)
+  `);
+
+  try {
+    await db.query(
+      'ALTER TABLE billing MODIFY COLUMN final_amount DECIMAL(10,2) NOT NULL DEFAULT 0.00'
+    );
+  } catch (err) {
+    if (!/Duplicate|already exists|Data truncated|doesn\'t exist/i.test(err.message)) {
+      throw err;
+    }
+  }
 }
 
 async function runMigrations() {
