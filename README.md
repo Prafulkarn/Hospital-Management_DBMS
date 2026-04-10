@@ -10,8 +10,8 @@ Manage patients, doctors, appointments, billing and medical records through a cl
 - 🏠 Dashboard with live stats
 - 🧑 Patient registration and history
 - 👨‍⚕️ Doctor directory and schedules
-- 📅 Appointment booking with conflict detection
-- 💳 Billing and payment tracking
+- 📅 Appointment booking ,bed allocation with conflict detection
+- 💳 Billing and payment tracking also insurance facility 
 - 🔒 Audit logging via database triggers
 
 ---
