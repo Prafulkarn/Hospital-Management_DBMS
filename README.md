@@ -11,7 +11,7 @@ Manage patients, doctors, appointments, billing and medical records ,beds,patien
 - 🧑 Patient registration and history
 - 👨‍⚕️ Doctor directory and schedules
 - 📅 Appointment booking ,bed allocation with conflict detection
-- 💳 Billing and payment tracking also insurance facility 
+- 💳 Billing and payment tracking also insurance facility while payment
 - 🔒 Audit logging via database triggers
 
 ---
