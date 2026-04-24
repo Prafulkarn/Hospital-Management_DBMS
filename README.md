@@ -1,7 +1,7 @@
 # 🏥 MediCore — Hospital Management System
 
 A full-stack Hospital Management System built with **Node.js + Express + MySQL + Vanilla JS**.
-Manage patients, doctors, appointments, billing and medical records through a clean web interface.
+Manage patients, doctors, appointments, billing and medical records ,beds,patients through a clean web interface.
 
 ---
 
@@ -10,8 +10,8 @@ Manage patients, doctors, appointments, billing and medical records through a cl
 - 🏠 Dashboard with live stats
 - 🧑 Patient registration and history
 - 👨‍⚕️ Doctor directory and schedules
-- 📅 Appointment booking with conflict detection
-- 💳 Billing and payment tracking
+- 📅 Appointment booking ,bed allocation with conflict detection
+- 💳 Billing and payment tracking also insurance facility while payment
 - 🔒 Audit logging via database triggers
 
 ---
